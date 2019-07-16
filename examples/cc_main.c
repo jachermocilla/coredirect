@@ -313,9 +313,11 @@ static int __init_ctx( struct cc_context *ctx )
 
                 memset(&attr, 0, sizeof(attr));
 
+               //log_fatal("JACH: %d\n", ctx->ib_port);
+
                 attr.qp_state        = IBV_QPS_INIT;
                 attr.pkey_index      = 0;
-                attr.port_num        = ctx->ib_port;
+                attr.port_num        = 1; //ctx->ib_port;
                 attr.qp_access_flags = 0;
 
                 rc = ibv_modify_qp(ctx->mqp, &attr,
@@ -608,7 +610,7 @@ int main(int argc, char *argv[])
 	const char *ib_devname = NULL;
         char *env = NULL;
         int use_mq = 1;
-        int ib_port = -1;
+        int ib_port = -1;// -1;
         int oob_barrier = 0;
         int is_RoCE = 0;
 #if defined(USE_MPI)
