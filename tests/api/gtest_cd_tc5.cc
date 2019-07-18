@@ -97,7 +97,7 @@ TEST_F(tc_verbs_post_send_wait, ti_2) {
 
 		/* we need to be sure that all work request have been posted */
 		//sleep(2);
-		sleep(2);
+		sleep(5);
 
 		poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
