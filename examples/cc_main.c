@@ -119,7 +119,7 @@ enum {
 	CC_LOG_TRACE
 };
 
-static uint32_t __debug_mask = 1;
+static uint32_t __debug_mask = CC_LOG_TRACE;
 static int  __my_proc = 0;
 
 #define log_fatal(fmt, ...)  \
