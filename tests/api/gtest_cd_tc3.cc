@@ -417,6 +417,8 @@ TEST_F(tc_verbs_post_send_en, ti_6) {
 				++wrid;
 			}
 
+         sleep(2);
+
 			/* poll the completion for a while before giving up of doing it .. */
 			poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
 			ASSERT_TRUE(poll_result >= 0);
