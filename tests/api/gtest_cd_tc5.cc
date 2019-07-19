@@ -17,7 +17,7 @@
 
 class tc_verbs_post_send_wait : public verbs_test_cd {};
 
-#define SEND_POST_COUNT		10
+#define SEND_POST_COUNT		10  
 
 /* tc_verbs_post_send: [TI.1]
  * IBV_WR_CQE_WAIT
@@ -65,7 +65,7 @@ TEST_F(tc_verbs_post_send_wait, ti_2) {
 		gettimeofday(&cur_time, NULL);
 		start_time_msec = (cur_time.tv_sec * 1000) + (cur_time.tv_usec / 1000);
 		do {
-			if (wrid == 0)
+			if (wrid == 0)                                        //if this is the first work request the send a WWR
 			{
 				struct ibv_exp_send_wr wr;
 
@@ -102,10 +102,12 @@ TEST_F(tc_verbs_post_send_wait, ti_2) {
 		poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
 		s_poll_cq_count += poll_result;
+      VERBS_INFO("poll result: %d\n",poll_result);
 
 		poll_result = ibv_poll_cq(ctx->rcq, ctx->cq_rx_depth, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
 		r_poll_cq_count += poll_result;
+      VERBS_INFO("poll result: %d\n",poll_result);
 
 		EXPECT_EQ(SEND_POST_COUNT, wrid);
 		EXPECT_EQ(SEND_POST_COUNT, s_poll_cq_count);
@@ -114,6 +116,7 @@ TEST_F(tc_verbs_post_send_wait, ti_2) {
 		poll_result = ibv_poll_cq(ctx->mcq, 0x10, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
 		m_poll_cq_count += poll_result;
+      VERBS_INFO("poll result: %d\n",poll_result);
 
 		EXPECT_EQ(1, m_poll_cq_count);
 		EXPECT_EQ(IBV_WC_SUCCESS, ctx->wc[0].status);
