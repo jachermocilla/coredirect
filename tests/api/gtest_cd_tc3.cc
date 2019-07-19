@@ -210,6 +210,8 @@ TEST_F(tc_verbs_post_send_en, ti_3) {
 		int r_poll_cq_count = 0;
 
 		routs = ctx->qp_rx_depth;
+	
+      //__init_test(IBV_EXP_QP_CREATE_CROSS_CHANNEL | IBV_EXP_QP_CREATE_MANAGED_SEND);
 
 		rcnt = 0;
 		scnt = 0;
@@ -232,6 +234,7 @@ TEST_F(tc_verbs_post_send_en, ti_3) {
 		poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
 		s_poll_cq_count += poll_result;
+      VERBS_INFO("Poll result: %d\n",poll_result);
 
 		poll_result = ibv_poll_cq(ctx->rcq, ctx->cq_rx_depth, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
