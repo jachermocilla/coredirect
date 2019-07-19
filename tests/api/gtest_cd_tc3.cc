@@ -417,7 +417,7 @@ TEST_F(tc_verbs_post_send_en, ti_6) {
 				++wrid;
 			}
 
-         sleep(2);
+         //sleep(5);
 
 			/* poll the completion for a while before giving up of doing it .. */
 			poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
@@ -467,7 +467,8 @@ TEST_F(tc_verbs_post_send_en, ti_6) {
 
 			r_poll_cq_count += poll_result;
 
-			/* CQE found */
+
+			/// CQE found 
 			for (i = 0; i < poll_result; ++i) {
 				if (ctx->wc[i].status != IBV_WC_SUCCESS) {
 					VERBS_TRACE("Failed status %s (%d) for wr_id %d\n",
@@ -503,6 +504,8 @@ TEST_F(tc_verbs_post_send_en, ti_6) {
 						TEST_GET_WRID(ctx->wc[i].wr_id),
 						scnt, rcnt, poll_result);
 			}
+
+
 
 			gettimeofday(&cur_time, NULL);
 			cur_time_msec = (cur_time.tv_sec * 1000)

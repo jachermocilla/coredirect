@@ -736,7 +736,7 @@ protected:
 			attr.dest_qp_num	   = ctx->mqp->qp_num;
 			attr.rq_psn                = 0;
 			attr.max_dest_rd_atomic    = 1;
-			attr.min_rnr_timer         = 12;
+			attr.min_rnr_timer         = 100;
 			attr.ah_attr.is_global     = 0;
 			attr.ah_attr.dlid          = 0;
 			attr.ah_attr.sl            = 0;
