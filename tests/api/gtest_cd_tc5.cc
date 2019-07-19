@@ -109,7 +109,7 @@ TEST_F(tc_verbs_post_send_wait, ti_2) {
 
 		EXPECT_EQ(SEND_POST_COUNT, wrid);
 		EXPECT_EQ(SEND_POST_COUNT, s_poll_cq_count);
-		//EXPECT_EQ(SEND_POST_COUNT, r_poll_cq_count);  //this test causs the fail
+		//EXPECT_EQ(SEND_POST_COUNT, r_poll_cq_count);  //this test causs the fail so comment it out for now
 
 		poll_result = ibv_poll_cq(ctx->mcq, 0x10, ctx->wc);
 		ASSERT_TRUE(poll_result >= 0);
