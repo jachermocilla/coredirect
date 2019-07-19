@@ -743,6 +743,8 @@ TEST_F(tc_verbs_post_send_en, ti_8) {
 				++wrid;
 			}
 
+         sleep(1);
+
 			/* poll the completion for a while before giving up of doing it .. */
 			poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
 			ASSERT_TRUE(poll_result >= 0);
@@ -836,6 +838,7 @@ TEST_F(tc_verbs_post_send_en, ti_8) {
 		} while ((wrid < SEND_POST_COUNT)
 				|| ((cur_time_msec - start_time_msec)
 						< MAX_POLL_CQ_TIMEOUT));
+
 
 		EXPECT_EQ(SEND_POST_COUNT, wrid);
 		EXPECT_EQ(3, s_poll_cq_count);
@@ -931,6 +934,8 @@ TEST_F(tc_verbs_post_send_en, ti_9) {
 				}
 				++wrid;
 			}
+
+         sleep(1);
 
 			/* poll the completion for a while before giving up of doing it .. */
 			poll_result = ibv_poll_cq(ctx->scq, ctx->cq_tx_depth, ctx->wc);
