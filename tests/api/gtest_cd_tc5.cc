@@ -256,10 +256,10 @@ TEST_F(tc_verbs_post_send_wait, ti_4) {
 			poll_result = ibv_poll_cq(ctx->mcq, 0x10, ctx->wc);
 			ASSERT_TRUE(poll_result >= 0);
 			m_poll_cq_count += poll_result;
-         VERBS_INFO("poll result: %d\n",poll_result);
 
 			/* completion should not be raised */
 			EXPECT_EQ(0, m_poll_cq_count);
+         VERBS_INFO("poll result: %d\n",poll_result);
 
 			rc = __post_write(ctx, wrid, IBV_EXP_WR_SEND);
 			ASSERT_EQ(EOK, rc);
